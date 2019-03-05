@@ -1,0 +1,30 @@
+
+
+<a href='/profile/{{currentUser.username}}'><p> {{ currentUser.username}} </p></a>
+<img src="{{ currentUser.defaultImg }} " alt="Profile Avatar" width="200" height="200" >
+
+
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+
+<label for="imgInput">Upload Image</label>
+<input type="file" name="imgUrl">
+
+<label for="descripInput">Description</label>
+<input type="text" name="description">
+
+<button type="submit">Upload</button>
+
+</form>
+
+{{#each post}}
+
+<a href='{{this._id}}'><img src="{{ this.imgUrl }}" alt="" height="400" width="400"></a>
+
+
+{{/each}}
+
+
+
+
+

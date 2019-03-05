@@ -1,0 +1,23 @@
+<h1>Create Profile</h1>
+{{!-- enctype="multipart/form-data"  --}}
+<form action="/signup" method="POST" enctype="multipart/form-data" >
+
+<label for="emailInput">Email:</label>
+<input id="emailInput" type="email" name="email">
+
+<label for="passwordInput">Password:</label>
+<input id="passwordInput" type="password" name="password">
+
+<label for="nameInput">Full Name:</label>
+<input id="nameInput" type="text" name="fullName">
+
+<label for="userInput">Username:</label>
+<input id="userInput" type="text" name="username">
+
+<label for="picInput">Profile Picture</label>
+<input id="picInput" type="file" name="defaultImg">
+
+
+<button type="submit">Create Account</button>
+</form>
+

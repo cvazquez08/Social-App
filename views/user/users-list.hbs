@@ -1,0 +1,15 @@
+
+<h1>Explore all users</h1>
+
+
+    {{#each newUsers}}
+
+      <img src="{{this.defaultImg}}" alt="" height="100" width="100">
+      <h1> <a href="profile/{{this.username}}">{{this.username}}</a></h1>
+
+
+         <h3> <a href="room/{{this.id}}">{{this.name}}</a></h3>
+
+
+    {{/each}}
+  

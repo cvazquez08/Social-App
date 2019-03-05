@@ -1,0 +1,17 @@
+
+<img src="{{foundPost.imgUrl}}" alt="" height="400" width="400">
+  <p>{{foundPost.description}}</p>
+
+
+{{#each foundPost.comments}}
+<p> <b>@{{ this.user.username }}</b>  {{ this.comments }}</p>
+{{/each}}
+
+
+<form action="/{{foundPost._id}}/comment" method="POST">
+
+<textarea name="comment" id="" cols="30" rows="2"></textarea>
+
+<button type="submit">Create</button>
+
+</form>

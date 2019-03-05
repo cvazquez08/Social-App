@@ -1,0 +1,26 @@
+<p> {{ foundUser.username }} </p>
+
+<img src="{{ foundUser.defaultImg }} " alt="Profile Avatar" width="200" height="200">
+
+<br>
+
+
+
+<form action="/follow/{{foundUser._id}}" method="POST">
+  <button type="submit">{{text}}</button>
+</form>
+
+<hr>
+
+
+{{#each foundUser.post}}
+
+<a href="/view/{{ this._id}} "><img src="{{ this.imgUrl }}" alt="" height="400" width="400"></a>
+
+
+{{/each}}
+
+
+
+
+{{!-- refactor profile page currentUser.defaultImg --}}

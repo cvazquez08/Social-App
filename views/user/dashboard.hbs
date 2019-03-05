@@ -1,0 +1,13 @@
+<h1>Welcome {{currentUser.username}}! </h1>
+
+<p>Following: {{followingLength}}</p>
+<p>Followers: {{followerLength}}</p>
+
+
+
+{{#each posts}}
+
+<p>{{this.user.username}}</p>
+<img src="{{this.imgUrl}}" alt="" width="400" height="400">
+
+{{/each}}
