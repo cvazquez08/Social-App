@@ -19,7 +19,7 @@ const passportSetup = require('./config/passport/passport-setup');
 mongoose
   // .connect('mongodb://localhost/socialapp', {useNewUrlParser: true})
   // upload to heroku DB
-  .connect('mongodb://heroku_j26ncn4h:fnqh34nusbh3lqbpcut1ea0ptf@ds237955.mlab.com:37955/heroku_j26ncn4h', {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
