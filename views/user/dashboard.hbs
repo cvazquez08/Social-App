@@ -1,7 +1,13 @@
-<h1>Welcome {{currentUser.username}}! </h1>
+<div class="container">
+    <div class="row">
+      <img src="{{currentUser.defaultImg}}" alt="profile picture" class='profilePicture'>
+    </div>
 
-<p>Following: {{followingLength}}</p>
-<p>Followers: {{followerLength}}</p>
+    <div class="row">
+    <p>Following: {{followingLength}}</p>
+    <p>Followers: {{followerLength}}</p>
+    </div>
+</div>
 
 
 

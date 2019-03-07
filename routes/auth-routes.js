@@ -13,7 +13,7 @@ const uploadCloudinary = require('../config/cloudinary.js');
 
 // render signup hbs file
 router.get('/signup', (req,res,next) => {
-  res.render('auth/signup');
+  res.render('auth/signup', {layout: false});
 })
 
 // form action="/signup" 
@@ -63,7 +63,7 @@ router.post('/signup', uploadCloudinary.single('defaultImg'), (req,res,next) => 
 
 // render login hbs file
 router.get('/login', (req,res,next) => {
-  res.render('auth/login');
+  res.render('auth/login', {layout: false});
 })
 
 // login POST route - authentaction to local-strategy
@@ -75,13 +75,12 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 
-// ** LOGOUT **
-router.post('/logout', (req,res,next) => {
+// // ** LOGOUT **
+router.get('/logout', (req,res,next) => {
   // logOut() passport method which destorys session
   req.logOut(); 
   res.redirect('/login')
 })
-
 
 
 module.exports = router;

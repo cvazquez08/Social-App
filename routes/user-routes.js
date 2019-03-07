@@ -74,9 +74,8 @@ router.get("/dashboard", (req, res, next) => {
       // query DB for all posts from the ID's saved in followingID 
       // & sort them by createdAt
       Post.find({user: {$in:followingID}})
-      .sort({"createdAt": -1}).populate("user")
+      .sort({"createdAt": 1}).populate("user")
       .then( posts => {
-        console.log('areiagelga;gjag', posts)
         res.render("user/dashboard", {
           user: theUser,
           followerLength,
