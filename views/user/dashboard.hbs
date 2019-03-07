@@ -1,19 +1,36 @@
-<div class="container">
-    <div class="row">
-      <img src="{{currentUser.defaultImg}}" alt="profile picture" class='profilePicture'>
-    </div>
 
-    <div class="row">
-    <p>Following: {{followingLength}}</p>
-    <p>Followers: {{followerLength}}</p>
+
+<div class="container dashboard-container" >
+  <div class="row">
+    <div class="col-sm">
+      <p>{{currentUser.username}}</p>
+      <img src="{{currentUser.defaultImg}}" alt="profile picture" class='profilePicture'>      
     </div>
+    <div class="col-sm data-down">
+    <p>Following <br> {{followingLength}}</p>
+    </div>
+    <div class="col-sm data-down">
+    <p>Followers <br> {{followerLength}}</p>
+    </div>
+  </div>
+
+  <hr>
 </div>
 
 
 
 {{#each posts}}
 
-<p>{{this.user.username}}</p>
-<img src="{{this.imgUrl}}" alt="" width="400" height="400">
+
+<div class="each-post">
+
+
+<div class="left-align">
+<img src="{{this.user.defaultImg}}" alt="profile picture" class="post-default-image"> <span>{{this.user.username}}</span><br>
+</div>
+
+<img src="{{this.imgUrl}}" class="img-posts">
+
+</div>
 
 {{/each}}
