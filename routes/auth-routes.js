@@ -54,12 +54,25 @@ router.post('/signup', uploadCloudinary.single('defaultImg'), (req,res,next) => 
 
   .then( user => {
 
-    res.redirect('login');
+      // if all good, login user automatically
+      req.logIn(user, (err) => {
+        if(err){
+          // req.flash.error = 'some message here'
+          // shorthand
+          req.flash('error', 'Auto login is not working, please login manually')
+          res.redirect('/login');
+          return;
+        }
+        res.redirect('/profile');
+      })
+
   })
   .catch( error => next(error))
 })
   .catch(error =>  next(error))
 })
+
+
 
 // render login hbs file
 router.get('/login', (req,res,next) => {
