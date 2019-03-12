@@ -1,26 +1,38 @@
-<p> {{ foundUser.username }} </p>
+<div class="container dashboard-container">
+  <div class="row">
+    <div class="col-sm">
+      <p>{{foundUser.username}}</p>
 
-<img src="{{ foundUser.defaultImg }} " alt="Profile Avatar" width="200" height="200">
+      <img src="{{foundUser.defaultImg}}" alt="profile picture" class='profilePicture'>
 
-<br>
+    </div>
+    <div class="col-sm data-down">
+      <p>Following <br> {{userFollowingLength}}</p>
+    </div>
+    <div class="col-sm data-down">
+      <p>Followers <br> {{userFollowerLength}}</p>
+    </div>
+  </div>
+
+  <div class="follow-align">
+    <form action="/follow/{{foundUser._id}}" method="POST">
+      <button type="submit" class="follow-button btn btn-info">{{text}}</button>
+  </div>
+
+  </form>
+
+  <hr>
+
+</div>
 
 
+<div class="container pt-4">
+  <div class="row">
+    {{#each foundUser.post}}
+    <div class="card" style="width: 20rem">
+      <a href="/view/{{ this._id}} "><img src="{{ this.imgUrl }}" class="card-img-top pt-2"></a>
 
-<form action="/follow/{{foundUser._id}}" method="POST">
-  <button type="submit">{{text}}</button>
-</form>
-
-<hr>
-
-
-{{#each foundUser.post}}
-
-<a href="/view/{{ this._id}} "><img src="{{ this.imgUrl }}" alt="" height="400" width="400"></a>
-
-
-{{/each}}
-
-
-
-
-{{!-- refactor profile page currentUser.defaultImg --}}
+    </div>
+    {{/each}}
+  </div>
+</div>

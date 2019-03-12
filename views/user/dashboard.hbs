@@ -1,16 +1,14 @@
-
-
-<div class="container dashboard-container" >
+<div class="container dashboard-container">
   <div class="row">
     <div class="col-sm">
       <p>{{currentUser.username}}</p>
-      <img src="{{currentUser.defaultImg}}" alt="profile picture" class='profilePicture'>      
+      <img src="{{currentUser.defaultImg}}" alt="profile picture" class='profilePicture'>
     </div>
     <div class="col-sm data-down">
-    <p>Following <br> {{followingLength}}</p>
+      <p>Following <br> {{followingLength}}</p>
     </div>
     <div class="col-sm data-down">
-    <p>Followers <br> {{followerLength}}</p>
+      <p>Followers <br> {{followerLength}}</p>
     </div>
   </div>
 
@@ -19,18 +17,21 @@
 
 
 
-{{#each posts}}
+  {{#each posts}}
 
 
-<div class="each-post">
+  <div class="each-post">
+
+    <div class="left-align">
+      <img src="{{this.user.defaultImg}}" alt="profile picture" class="post-default-image">
+      <span>{{this.user.username}}</span><br>
+    </div>
+
+    <a href="/view/{{this._id}}"><img src="{{this.imgUrl}}" class="img-posts"></a>
+    <p><b>{{this.user.username}}</b> {{this.description}}</p>
 
 
-<div class="left-align">
-<img src="{{this.user.defaultImg}}" alt="profile picture" class="post-default-image"> <span>{{this.user.username}}</span><br>
-</div>
 
-<img src="{{this.imgUrl}}" class="img-posts">
 
-</div>
-
-{{/each}}
+</div>  
+  {{/each}}

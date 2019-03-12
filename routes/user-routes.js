@@ -9,6 +9,10 @@ const uploadCloudinary = require("../config/cloudinary.js");
 
 // render profile hbs page
 router.get("/profile", (req, res, next) => {
+  // set variable to keep track of length for following / followers => send to hbs
+  let followerLength = req.user.followers.length;
+  let followingLength = req.user.following.length;
+
   // if no current user redirect back to login
   if (!req.user) {
     res.redirect("/login");
@@ -17,7 +21,7 @@ router.get("/profile", (req, res, next) => {
   // if user is currently logged in render profile hbs
   Post.find({ user: req.user })
     .then(post => {
-      res.render("user/profile", { post });
+      res.render("user/profile", { post, followerLength, followingLength });
     })
     .catch(error => next(error));
 });
@@ -26,8 +30,15 @@ router.get("/profile", (req, res, next) => {
 router.get("/explore", (req, res, next) => {
   // empty array to store all users other than user currently logged in
   const newUsers = [];
+
   User.find().then(usersFromDB => {
     usersFromDB.forEach(oneUser => {
+      if (oneUser.followers.indexOf(req.user._id) > -1) {
+        // setting variable for follow / unfollow button
+        oneUser.isFollowing = "Unfollow";
+      } else {
+        oneUser.isFollowing = "Follow";
+      }
       // iterate through DB
       // if user DOES NOT EQUAL current user => push to newUsers array
       if (!oneUser._id.equals(req.user._id)) {
@@ -39,19 +50,27 @@ router.get("/explore", (req, res, next) => {
   });
 });
 
+// get route to display another user
 router.get("/profile/:username", (req, res, next) => {
   User.findOne({ username: req.params.username })
     .populate("post")
     .then(foundUser => {
+      // set variables to keep track of length and send to hbs
+      let userFollowerLength = foundUser.followers.length;
+      let userFollowingLength = foundUser.following.length;
+      // set variable for follow / unfollow button
       let text;
-      // console.log('user in sess: ', req.user);
-      console.log(foundUser.followers.indexOf(req.user._id));
       if (foundUser.followers.indexOf(req.user._id) > -1) {
         text = "Unfollow";
       } else {
         text = "Follow";
       }
-      res.render("user/user-page", { foundUser, text });
+      res.render("user/user-page", {
+        foundUser,
+        text,
+        userFollowerLength,
+        userFollowingLength
+      });
     })
     .catch(error => next(error));
 });
@@ -61,29 +80,30 @@ router.get("/dashboard", (req, res, next) => {
   let followerLength = req.user.followers.length;
   let followingLength = req.user.following.length;
 
-  User.findOne(req.user._id).populate({path: 'following', populate : {path : 'post'}})
+  User.findOne(req.user._id)
+    .populate({ path: "following", populate: { path: "post" } })
     .then(theUser => {
-
       // empty array to store id's of users that currentUser is following
       let followingID = [];
       // iterate through followrs and push to empty array
-      theUser.following.forEach( elem => {
-        followingID.push(elem._id)
-      })
-      
-      // query DB for all posts from the ID's saved in followingID 
+      theUser.following.forEach(elem => {
+        followingID.push(elem._id);
+      });
+
+      // query DB for all posts from the ID's saved in followingID
       // & sort them by createdAt
-      Post.find({user: {$in:followingID}})
-      .sort({"createdAt": 1}).populate("user")
-      .then( posts => {
-        res.render("user/dashboard", {
-          user: theUser,
-          followerLength,
-          followingLength,
-          posts
-        });
-      })
-      .catch(error => next(error))
+      Post.find({ user: { $in: followingID } })
+        .sort({ createdAt: 1 })
+        .populate("user")
+        .then(posts => {
+          res.render("user/dashboard", {
+            user: theUser,
+            followerLength,
+            followingLength,
+            posts
+          });
+        })
+        .catch(error => next(error));
     })
     .catch(error => next(error));
 });
@@ -93,7 +113,7 @@ router.get("/dashboard", (req, res, next) => {
 // form action="/follow/{{foundUser._id}}" method="POST"
 router.post("/follow/:foundUser", (req, res, next) => {
   const indexOfElem = req.user.following.indexOf(req.params.foundUser);
-  console.log(req.user.followers.indexOf(req.params.foundUser))
+  console.log(req.user.followers.indexOf(req.params.foundUser));
   // IF USER IS ALREADY IN, SPLICE IT
 
   if (indexOfElem > -1) {

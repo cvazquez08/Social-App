@@ -1,30 +1,46 @@
+<div class="container dashboard-container">
+  <div class="row">
+    <div class="col-sm">
+      <p>{{currentUser.username}}</p>
+      <img src="{{currentUser.defaultImg}}" alt="profile picture" class='profilePicture'>
+    </div>
+    <div class="col-sm data-down">
+      <p>Following <br> {{followingLength}}</p>
+    </div>
+    <div class="col-sm data-down">
+      <p>Followers <br> {{followerLength}}</p>
+    </div>
+  </div>
 
 
-<a href='/profile/{{currentUser.username}}'><p> {{ currentUser.username}} </p></a>
-<img src="{{ currentUser.defaultImg }} " alt="Profile Avatar" width="200" height="200" >
+  <div class="center-align">
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+
+      <label for="imgInput" class="upload-tag">Upload Image</label>
+      <input type="file" name="imgUrl">
+          <br>    
+      <label for="descripInput">Description</label>
+      <input type="text" name="description">
+
+      <button type="submit" class="btn btn-info">Upload</button>
+
+    </form>
+
+    <hr>
+
+  </div>
+
+</div>
 
 
-
-<form action="/upload" method="POST" enctype="multipart/form-data">
-
-<label for="imgInput">Upload Image</label>
-<input type="file" name="imgUrl">
-
-<label for="descripInput">Description</label>
-<input type="text" name="description">
-
-<button type="submit">Upload</button>
-
-</form>
-
-{{#each post}}
-
-<a href='{{this._id}}'><img src="{{ this.imgUrl }}" alt="" height="400" width="400"></a>
-
-
-{{/each}}
-
-
-
-
-
+<div class="container pt-4">
+  <div class="row">
+    {{#each post}}
+    <li class="col-md-4 profile-pictures">
+    <div class="card" style="width: 20rem">
+      <a href='{{this._id}}'><img src="{{ this.imgUrl }}" class="card-img-top pt-2"></a>
+    </div>
+    </li>
+    {{/each}}
+  </div>
+</div>

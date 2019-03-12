@@ -1,22 +1,22 @@
-<h1>Edit Post</h1>
-
-<img src="{{foundPost.imgUrl}}" alt="" height="400" width="400">
-
-<form action="/{{foundPost.id}}/edit-post" method="POST">
-
-<label for="">Description</label>
-<input type="text" name="description" value="{{foundPost.description}}">
-
-<button type="submit">Submit Changes</button>
-
-</form>
-<form action="/{{foundPost.id}}/delete-post" method="POST">
-<button type='submit'>Delete</button>
-</form>
-
-{{#each foundPost.comments}}
-<p> <b>@{{ this.user.username }}</b>  {{ this.comments }}</p>
-{{/each}}
+<div class="container edit-container">
+  <h1>Edit Post</h1>
 
 
+  <img src="{{foundPost.imgUrl}}" alt="" height="400" width="400">
 
+  <form action="/{{foundPost.id}}/edit-post" method="POST">
+
+    <label for="">Description</label>
+    <input type="text" name="description" value="{{foundPost.description}}">
+
+    <button type="submit">Submit Changes</button>
+
+  </form>
+  <form action="/{{foundPost.id}}/delete-post" method="POST">
+    <button type='submit'>Delete</button>
+  </form>
+
+  {{#each foundPost.comments}}
+  <p> <b>@{{ this.user.username }}</b> {{ this.comments }}</p>
+  {{/each}}
+</div>

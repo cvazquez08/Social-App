@@ -1,17 +1,18 @@
-
-<img src="{{foundPost.imgUrl}}" alt="" height="400" width="400">
+<div class="container center-align">
+  <img src="{{foundPost.imgUrl}}" style="width: 50%;">
   <p>{{foundPost.description}}</p>
 
 
-{{#each foundPost.comments}}
-<p> <b>@{{ this.user.username }}</b>  {{ this.comments }}</p>
-{{/each}}
+  {{#each foundPost.comments}}
+  <p> <b>@{{ this.user.username }}</b> {{ this.comments }}</p>
+  {{/each}}
 
 
-<form action="/{{foundPost._id}}/comment" method="POST">
+  <form action="/{{foundPost._id}}/comment" method="POST">
 
-<textarea name="comment" id="" cols="30" rows="2"></textarea>
+    <textarea name="comment" id="" cols="30" rows="2"></textarea>
+    <br>
+    <button type="submit">Create</button>
 
-<button type="submit">Create</button>
-
-</form>
+  </form>
+</div>

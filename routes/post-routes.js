@@ -4,6 +4,7 @@ const router = express.Router();
 // Make User & Post model available
 const User = require("../models/user-model");
 const Post = require("../models/imgPost-model");
+
 // require cloudinary
 const uploadCloudinary = require("../config/cloudinary.js");
 
@@ -25,6 +26,7 @@ router.post("/upload", uploadCloudinary.single("imgUrl"), (req, res, next) => {
       // res.redirect('/profile')
       User.findById(user._id)
         .then(founduser => {
+          // push post into user model
           founduser.post.push(createdPost);
           founduser.save();
           res.redirect("/profile");
@@ -34,7 +36,7 @@ router.post("/upload", uploadCloudinary.single("imgUrl"), (req, res, next) => {
     .catch(error => next(error)); // closes Post.create
 });
 
-// get route to display edit page
+// get route to display edit post page
 router.get("/:postid", (req, res, next) => {
   Post.findById(req.params.postid)
     .populate({ path: "comments", populate: { path: "user" } })
@@ -44,24 +46,28 @@ router.get("/:postid", (req, res, next) => {
     .catch(error => next(error));
 });
 
+// post route for editing the description
 // form action="/{{foundPost.id}}/edit-post"
-// edit description for post
 router.post("/:postid/edit-post", (req, res, next) => {
   Post.findByIdAndUpdate(req.params.postid, {
     description: req.body.description
   })
     .then(update => {
+      // once edit complete redirect back to profile
       res.redirect("/profile");
     })
     .catch(error => next(error));
 });
 
+// post route to delete single post
 // form action="/delete-post"
 router.post("/:postid/delete-post", (req, res, next) => {
+  // remove post_.id from user and save
   req.user.post.pull(req.params.postid);
   req.user
     .save()
     .then(elem => {
+      // delete from Post model as well
       Post.findByIdAndDelete(req.params.postid)
         .then(thePost => {
           res.redirect("/profile");
@@ -76,7 +82,6 @@ router.get("/view/:postid", (req, res, next) => {
   Post.findById(req.params.postid)
     .populate({ path: "comments", populate: { path: "user" } })
     .then(foundPost => {
-      console.log("post is: ", foundPost);
       res.render("post/user-post", { foundPost });
     })
     .catch(error => next(error));
