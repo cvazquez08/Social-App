@@ -5,7 +5,6 @@ body {
 }
 
 
-
 .main-head{
   height: 150px;
   background: #FFF;
@@ -14,7 +13,8 @@ body {
 
 .sidenav {
   height: 100%;
-  background-color: black;
+  background-image: url('/images/ToonFeed_Background-01.png');
+  background-size: cover;
   overflow-x: hidden;
   padding-top: 20px;
 }

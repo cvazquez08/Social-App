@@ -1,26 +1,27 @@
-<div class="container search-all">
+<div class="container search-all-header">
 
   <h1>Explore All Users</h1>
 
-  {{#each newUsers}}
 
-
-
-  <div class="container search-all">
-    <div class="row">
-      <div class="col">
-        <p> <img src="{{this.defaultImg}}" height="100" width="100"><a href="profile/{{this.username}}">
-            {{this.username}}</a></p>
-      </div>
-      <div class="col explore-button-div">
-        <form action="/follow/{{this._id}}" method="POST">
-          <button type="submit" class="btn btn-info">{{this.isFollowing}}</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-
-  {{/each}}
 
 </div>
+
+{{#each newUsers}}
+
+
+<div class="container search-all">
+  <div class="row">
+    <div class="col">
+      <p> <img src="{{this.defaultImg}}" class="explore-image"><a href="profile/{{this.username}}">
+          {{this.username}}</a></p>
+    </div>
+    <div class="col explore-button-div">
+      <form action="/follow/{{this._id}}" method="POST">
+        <button type="submit" class="button-color">{{this.isFollowing}}</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{{/each}}

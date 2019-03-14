@@ -1,7 +1,7 @@
 <div class="container dashboard-container">
   <div class="row">
     <div class="col-sm">
-      <p>{{foundUser.username}}</p>
+      <p class="profile-name">{{foundUser.username}}</p>
 
       <img src="{{foundUser.defaultImg}}" alt="profile picture" class='profilePicture'>
 
@@ -16,7 +16,7 @@
 
   <div class="follow-align">
     <form action="/follow/{{foundUser._id}}" method="POST">
-      <button type="submit" class="follow-button btn btn-info">{{text}}</button>
+      <button type="submit" class="button-color">{{text}}</button>
   </div>
 
   </form>

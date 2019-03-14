@@ -9,11 +9,11 @@
     <label for="">Description</label>
     <input type="text" name="description" value="{{foundPost.description}}">
 
-    <button type="submit">Submit Changes</button>
+    <button type="submit" class="button-color">Submit Changes</button>
 
   </form>
   <form action="/{{foundPost.id}}/delete-post" method="POST">
-    <button type='submit'>Delete</button>
+    <button type='submit' class="button-color">Delete</button>
   </form>
 
   {{#each foundPost.comments}}

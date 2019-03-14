@@ -1,4 +1,23 @@
+*{
+  font-family: 'Karla', sans-serif;
 
+}
+
+.landing-page{
+
+  background-image: url('/images/ToonFeed_LandingPage-01.png');
+
+}
+
+.landing-font{
+  
+  font-family: 'Karla'
+
+}
+
+.landing-button-space{
+  margin-top: 2%;
+}
 
 .profilePicture{
   width: 150px;
@@ -7,7 +26,7 @@
 }
 
 .dashboard-container{
-  margin-top: 5%;
+  padding: 5% 20% 0 20%;
 }
 
 .data-down{
@@ -25,6 +44,12 @@
   border-radius: 50%;
 }
 
+.explore-image{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
 .left-align{
   /* margin-right: 20%; */
   margin: 0 40% 0.5% 0;
@@ -35,10 +60,14 @@
   height: 50%;
 }
 
-.search-all{
+.search-all-header{
   /* border: 1px black solid; */
   text-align: center;
-  padding: 1%;
+  padding-top: 10%;
+}
+
+.search-all{
+  text-align: center;
 }
 
 .center-align{
@@ -70,15 +99,54 @@
  padding-top: 4%;
 }
 
-.explore-button{
-  color: blue;
+.button-color{
+  background-color: #438DFF;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 16px;
+
 }
 
 .upload-tag{
   padding-left: 12%;
 }
 
+.profile-name{
+  font-weight: bold;
+  color: #438DFF
+}
 
+.nav-image{
+  height: 35px;
+  width: 180px;
+
+}
+
+.nav-image-landing{
+  height: 50px;
+}
+
+.landing-container{
+  margin-top: 16%;
+  text-align: center;
+}
+
+.landing-a-tag{
+  text-decoration: none;
+  color: white;
+}
+
+.landing-image{
+
+  width: 60%;
+
+
+}
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
